@@ -1,4 +1,4 @@
-name: بناء بريدي
+name: build breedy
 on: [push]
 jobs:
   build:
@@ -13,17 +13,11 @@ jobs:
         with:
           flutter-version: '3.22.3'
           channel: 'stable'
-      - name: إصلاح المجلدات
-        run: |
-          if [ -d "مكتبة" ]; then
-            mkdir -p lib
-            cp -r "مكتبة"/* lib/ || true
-          fi
-      - run: flutter create --project-name breedy --org com.breedy --platforms=android --overwrite.
       - run: |
-          if [ -d "مكتبة" ]; then
-            cp -r "مكتبة"/* lib/ || true
-          fi
+          if [ -d "مكتبة" ]; then mkdir -p lib; cp -r "مكتبة"/* lib/ || true; fi
+      - run: flutter create --project-name breedy --org com.breedy --platforms=android --overwrite
+      - run: |
+          if [ -d "مكتبة" ]; then cp -r "مكتبة"/* lib/ || true; fi
       - run: flutter pub get
       - run: flutter build apk --release
       - uses: actions/upload-artifact@v4
