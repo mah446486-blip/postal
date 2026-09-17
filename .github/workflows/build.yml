@@ -1,4 +1,4 @@
-name: build breedy
+name: build postal
 on: [push]
 jobs:
   build:
@@ -12,14 +12,13 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
-      - name: Fix project structure
-        run: |
+      - run: |
           if [! -d "android" ]; then
-            flutter create. --platforms=android --project-name breedy --org com.breedy.app
+            flutter create. --platforms=android --project-name postal --org com.postal.app
           fi
           flutter pub get
       - run: flutter build apk --release
       - uses: actions/upload-artifact@v4
         with:
-          name: breedy-apk
+          name: postal-apk
           path: build/app/outputs/flutter-apk/app-release.apk
