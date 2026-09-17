@@ -1,11 +1,82 @@
 import 'package:flutter/material.dart';
-void main(){runApp(const BreedyApp());}
-class BreedyApp extends StatelessWidget{
-const BreedyApp({super.key});
-@override
-Widget build(BuildContext c){return MaterialApp(title:'بريدي',debugShowCheckedModeBanner:false,theme:ThemeData(useMaterial3:true,colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal)),home: const Home());}}
-class Home extends StatefulWidget{const Home({super.key});@override State<Home> createState()=>_H();}
-class _H extends State<Home>{int i=0;@override Widget build(BuildContext c){return Scaffold(appBar: AppBar(title: Text(i==0?'مراسلات 🔒':i==1?'ريلز ✨':'موثقين ✅'),backgroundColor: Colors.teal,foregroundColor: Colors.white),body: i==0?const A():i==1?const B():const C(),bottomNavigationBar: BottomNavigationBar(currentIndex:i,onTap:(x)=>setState(()=>i=x),selectedItemColor:Colors.teal,items: const[BottomNavigationBarItem(icon: Icon(Icons.chat),label:'مراسلات'),BottomNavigationBarItem(icon: Icon(Icons.play_circle),label:'ريلز'),BottomNavigationBarItem(icon: Icon(Icons.verified),label:'موثقين')],));}}
-class A extends StatelessWidget{const A({super.key});@override Widget build(BuildContext c){return ListView.builder(itemCount:15,itemBuilder:(c,n)=>ListTile(leading:CircleAvatar(backgroundColor:Colors.teal.shade100,child:Text('${n+1}')),title:Text('رقم آمن: +966 5${n}00 00${n}0'),subtitle:const Text('مشفر end-to-end'),trailing:const Icon(Icons.lock,color:Colors.green,size:18)));}}
-class B extends StatelessWidget{const B({super.key});@override Widget build(BuildContext c){return PageView.builder(scrollDirection:Axis.vertical,itemCount:10,itemBuilder:(c,n)=>Container(color:Colors.black,child:Stack(children:[const Center(child:Icon(Icons.play_arrow,size:90,color:Colors.white24)),Positioned(bottom:20,left:15,child:Column(crossAxisAlignment:CrossAxisAlignment.start,children:[Text('@صانع_${n+1} ✅',style:const TextStyle(color:Colors.white,fontWeight:FontWeight.bold)),const Text('محتوى نظيف - خالي من الإباحية',style:TextStyle(color:Colors.greenAccent,fontSize:12))])));}}
-class C extends StatelessWidget{const C({super.key});@override Widget build(BuildContext c){return ListView(children: const[ListTile(title:Text('عمر - سفر'),subtitle:Text('1.2M - أصلي'),trailing:Icon(Icons.verified,color:Colors.blue)),ListTile(title:Text('سارة - طبخ'),subtitle:Text('890K'),trailing:Icon(Icons.verified,color:Colors.blue))]);}}
+
+void main() {
+  runApp(const BreedyApp());
+}
+
+class BreedyApp extends StatelessWidget {
+  const BreedyApp({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'بريدي',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.teal),
+      ),
+      home: const Home(),
+    );
+  }
+}
+
+class Home extends StatefulWidget {
+  const Home({super.key});
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  int i = 0;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(i == 0? 'مراسلات 🔒' : i == 1? 'موثقين ✨' : 'ريلز ✅'),
+        backgroundColor: Colors.teal,
+        foregroundColor: Colors.white,
+      ),
+      body: i == 0? const PageA() : i == 1? const PageB() : const PageC(),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: i,
+        onTap: (x) => setState(() => i = x),
+        selectedItemColor: Colors.teal,
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.chat), label: 'مراسلات'),
+          BottomNavigationBarItem(icon: Icon(Icons.verified), label: 'موثقين'),
+          BottomNavigationBarItem(icon: Icon(Icons.play_circle), label: 'ريلز'),
+        ],
+      ),
+    );
+  }
+}
+
+class PageA extends StatelessWidget {
+  const PageA({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return const Center(
+      child: Text('بحث بالأرقام المشفرة\nخصوصيتك محمية 100%', textAlign: TextAlign.center, style: TextStyle(fontSize: 20)),
+    );
+  }
+}
+
+class PageB extends StatelessWidget {
+  const PageB({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return const Center(
+      child: Text('صناع محتوى موثقين\nخالي من الإباحية', textAlign: TextAlign.center, style: TextStyle(fontSize: 20)),
+    );
+  }
+}
+
+class PageC extends StatelessWidget {
+  const PageC({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return const Center(
+      child: Text('ريلز أصلي فقط ✨\nالمسروق ينحذف تلقائيا', textAlign: TextAlign.center, style: TextStyle(fontSize: 20)),
+    );
+  }
+}
